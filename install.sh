@@ -6,8 +6,8 @@ sudo -H ./setup.py install
 sudo -H cp res/qni_default_conf.json $HOME_DIR/qni_conf.json
 
 sudo groupadd -f uinput
-sudo gpasswd -a $USER input
-sudo gpasswd -a $USER uinput
+sudo -H gpasswd -a $USER input
+sudo -H gpasswd -a $USER uinput
 # change /dev/uinput permissions
 sudo sh -c 'cat > /etc/udev/rules.d/99-uinput.rules <<EOF
 KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
