@@ -16,7 +16,7 @@ sudo apt install -y python3-tk python3-numpy
 cp res/qni_default_conf.json $HOME/qni_conf.json
 
 #-> Install qni_core package
-./setup.py install
+sudo -H ./setup.py install
 
 #-> Create 'uinput' group and add 'pi' user to both 'input' groups
 CUR_USER=$(whoami)
