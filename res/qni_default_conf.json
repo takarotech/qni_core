@@ -1,5 +1,5 @@
 {
- "hw_version": 0,
+ "hw_version": 2,
  "screen_position": [0, 0],
  "hw_table_keys": ["tile_count", "module_size", "tile_size", "electrodes_size", "mpr121_layout"],
  "hw_table_values":
