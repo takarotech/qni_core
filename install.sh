@@ -12,11 +12,18 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #-> Install tkinter and numpy from apt (pip seems to fail..)
 sudo apt install -y python3-tk python3-numpy
 
-#-> Copy the default qni configuration to the user dir
-cp res/qni_default_conf.json $HOME/qni_conf.json
-
 #-> Install qni_core package
 sudo -H ./setup.py install
+
+#-> Exit here if needed
+QNI_CONF_FILE_PATH=$HOME/qni_conf.json
+if [ -f $QNI_CONF_FILE_PATH ]; then
+    echo 'Found qni_conf file, skipping full installation!'
+	exit 0
+fi
+
+#-> Copy the default qni configuration to the user dir
+cp res/qni_default_conf.json $QNI_CONF_FILE_PATH
 
 #-> Create 'uinput' group and add 'pi' user to both 'input' groups
 CUR_USER=$(whoami)
