@@ -2,8 +2,8 @@
 
 #-> Make sure we don't run as root
 if (( EUID == 0 )); then
-   echo 'Please run without sudo!' 1>&2
-   exit 1
+	echo 'Please run without sudo!' 1>&2
+	exit 1
 fi
 
 #-> Go to the directory of this script
@@ -18,7 +18,7 @@ sudo -H ./setup.py install
 #-> Exit here if needed
 QNI_CONF_FILE_PATH=$HOME/qni_conf.json
 if [ -f $QNI_CONF_FILE_PATH ]; then
-    echo 'Found qni_conf file, skipping full installation!'
+	echo 'Found qni_conf file, skipping full installation!'
 	exit 0
 fi
 
