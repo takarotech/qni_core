@@ -6,7 +6,7 @@ import platform
 #  The evdev based class seems to support 40 points max!
 #  The UDP broadcast + numpy_array class works great and cross platform!
 
-if platform.system() == 'Linux':
+if platform.system() == 'NO_EVDEV_Linux':
     from evdev import UInput, InputDevice, ecodes, list_devices
 
     class EvTouch(object):
