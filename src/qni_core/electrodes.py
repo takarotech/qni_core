@@ -71,9 +71,23 @@ class ElectrodesGrid(Electrodes):
             self.pixel_sizes[0] // self.grid_sizes[0],
             self.pixel_sizes[1] // self.grid_sizes[1])
 
+        self.set_rotation(0)
         for i in self.electrodes:
-            i.grid_indexes = (
-                i.index % self.grid_sizes[0], i.index // self.grid_sizes[0])
+            i._grid_indexes = i.grid_indexes
+
+    def set_rotation(self, rotation):
+        s = self.grid_sizes[0]
+
+        for i in self.electrodes:  
+            if rotation == 1:
+                i.grid_indexes = (s - 1 - i.index // s, i.index % s)
+            elif rotation == 2:
+                i.grid_indexes = (s - 1 - i.index % s, s - 1 - i.index // s)
+            elif rotation == 3:
+                i.grid_indexes = (i.index // s, s - 1 - i.index % s)
+            else:
+                i.grid_indexes = (i.index % s, i.index // s)
+
             i.top_left_pixel = (
                 i.grid_indexes[0] * self.elec_pixel_sizes[0],
                 i.grid_indexes[1] * self.elec_pixel_sizes[1])
@@ -100,7 +114,7 @@ class EvElectrodesGrid(ElectrodesGrid):
         mt_points = []
 
         for i in self.get_touched():
-            mt_points.append(i.grid_indexes)
+            mt_points.append(i._grid_indexes)
 
         if self.last_mt_points != mt_points:
             self.last_mt_points = mt_points.copy()
@@ -121,6 +135,6 @@ class EvElectrodesGrid(ElectrodesGrid):
         self.last_mt_points = mt_points.copy()
 
         for i in self.electrodes:
-            i._set_touched(i.grid_indexes in mt_points)
+            i._set_touched(i._grid_indexes in mt_points)
 
         return True
